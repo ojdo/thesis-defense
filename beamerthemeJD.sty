@@ -1,0 +1,244 @@
+% !TeX root = defense.tex
+\RequirePackage{tikz}
+
+% colors
+% greys
+\definecolor{jdlightestgrey}{HTML}{ECECEC}
+\definecolor{jdverylightgrey}{HTML}{B3B3B3}
+\definecolor{jdlightergrey}{HTML}{999999}
+\definecolor{jdlightgrey}{HTML}{808080}
+\definecolor{jdgrey}{HTML}{666666}
+\definecolor{jddarkgrey}{HTML}{4D4D4D}
+\definecolor{jddarkergrey}{HTML}{333333}
+\definecolor{jddarkestgrey}{HTML}{1A1A1A}
+
+% blues
+\definecolor{jddarkestblue}{HTML}{0B1728}
+\definecolor{jddarkerblue}{HTML}{162D50}
+\definecolor{jddarkblue}{HTML}{214478}
+\definecolor{jdblue}{HTML}{5F8DD3}
+\definecolor{jdlightblue}{HTML}{87AADE}
+\definecolor{jdlighterblue}{HTML}{AFC6E9}
+\definecolor{jdlightestblue}{HTML}{D7E3F4}
+
+% others
+\definecolor{jdgreen}{HTML}{00AA44}
+\definecolor{jdblack}{HTML}{050505}
+\definecolor{jdwhite}{HTML}{FFFFFF}
+
+% beamer color definitions
+\setbeamercolor{structure}{fg=jddarkerblue}
+\setbeamercolor{alerted text}{fg=jddarkblue}
+\setbeamercolor{example text}{fg=jdgreen}
+\setbeamercolor{author in head/foot}{fg=jdgrey}
+\setbeamercolor{institute in head/foot}{fg=jdgrey}
+\setbeamercolor{date in head/foot}{fg=jdgrey}
+
+\setbeamercolor*{block body}{bg=normal text.bg!90!jdlightgrey}
+\setbeamercolor*{block body alerted}{bg=normal text.bg!90!jdlightblue}
+\setbeamercolor*{block body example}{bg=normal text.bg!90!jdgreen}
+\setbeamercolor*{block title}{parent=structure,bg=normal text.bg!75!jdgrey}
+\setbeamercolor*{block title alerted}{use={normal text,alerted text},fg=alerted text.fg!75!normal text.fg,bg=normal text.bg!75!alerted text.fg}
+\setbeamercolor*{block title example}{use={normal text,example text},fg=example text.fg!75!normal text.fg,bg=normal text.bg!75!example text.fg}
+
+% geometry
+
+% custom slide margin
+\setbeamersize{text margin left=.4cm}
+\setbeamersize{text margin right=.4cm}
+
+% fonts
+\setbeamerfont{title}{series=\bfseries}
+\setbeamerfont{subtitle}{series=\normalfont}
+
+
+
+
+
+
+% custom commands
+\usepackage[export]{adjustbox}
+\tikzset{ffgcaption/.style={%
+    anchor=south east,font=\tiny,
+    text=jdwhite,fill=jdblack,
+    fill opacity=.5,text opacity=1,inner sep=2pt,
+    text height=1ex,text depth=.25ex}}
+
+% \fullframegraphic 
+% renders a single image fullscreen, with an optional credit/caption in the 
+% lower right corner.
+% Usage: \fullframegraphic[some optional caption]{path/to/image}
+% It does not crop the image, but leads to white borders if image does not match
+% the aspect ratio of the slide. See commands \fullframegraphicw and
+% \fullframegraphich below for cropping alternatives.
+\newcommand{\fullframegraphic}[2][]{%
+\begin{frame}[plain]%
+\begin{tikzpicture}[remember picture,overlay]%
+\node[at=(current page.center)] {%
+\includegraphics[height=\paperheight,width=\paperwidth,keepaspectratio]{#2}%
+};%
+\ifx\relax#1\relax\else%
+\node[at=(current page.south east),ffgcaption] {#1};%
+\fi%
+\end{tikzpicture}%
+\end{frame}%
+}
+
+% \fullframegraphicw: scles image to frame width, cropping excess height.
+% use for images that are "taller" than the frame aspect ratio
+\newcommand{\fullframegraphicw}[2][]{%
+\begin{frame}[plain]%
+\begin{tikzpicture}[remember picture,overlay]%
+\node[at=(current page.center)] {%
+\includegraphics[min height=\paperheight,max width=\paperwidth,keepaspectratio]{#2}%
+};%
+\ifx\relax#1\relax\else%
+\node[at=(current page.south east),ffgcaption] {#1};%
+\fi%
+\end{tikzpicture}%
+\end{frame}%
+}
+
+% \fullframegraphich: scales image to frame height, cropping excess width.
+% use for images that are wider than the frame aspect ratio
+\newcommand{\fullframegraphich}[2][]{%
+\begin{frame}[plain]%
+\begin{tikzpicture}[remember picture,overlay]%
+\node[at=(current page.center)] {%
+\includegraphics[max height=\paperheight,min width=\paperwidth,keepaspectratio]{#2}%
+};%
+\ifx\relax#1\relax\else%
+\node[at=(current page.south east),ffgcaption] {#1};%
+\fi%
+\end{tikzpicture}%
+\end{frame}%
+}
+
+% \fullframegraphics: more customisable version of fullframegraphic, allowing
+% a third argument to insert additional tikz commands for custom overlays.
+% use when tooltips or highlights are required on a large image
+\newcommand{\fullframegraphics}[3][]{%
+\begin{frame}[plain]%
+\begin{tikzpicture}[remember picture,overlay]%
+\node[at=(current page.center)] {%
+\includegraphics[height=\paperheight,width=\paperwidth,keepaspectratio]{#2}%
+};%
+\ifx\relax#1\relax\else%
+\node[at=(current page.south east),ffgcaption] {#1};%
+\fi%
+#3%
+\end{tikzpicture}%
+\end{frame}%
+}
+
+
+
+
+
+
+
+
+% beamer templates
+
+% show logo top right corner, navigation symbols bottom right
+\setbeamertemplate{sidebar right}
+{
+  \vskip0.33cm%
+  \llap{\insertlogo\hskip0.4cm}%
+  \vfill%
+  \llap{\usebeamertemplate***{navigation symbols}\hskip0.4cm}%
+  \vskip2pt%
+}
+
+% slightly adapted footline from the stock 'infolines' outer theme
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.8\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+    \usebeamerfont{author in head/foot}
+    \hspace*{.4cm}\insertshortauthor{}\qquad
+    \insertshortinstitute{}\qquad
+    \insertshorttitle{}\qquad
+    \insertshortdate{}
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}
+    \makebox[5em][r]{%
+      \insertframenumber{} / \inserttotalframenumber\hspace*{.4cm}} 
+  \end{beamercolorbox}}%
+  \vskip.16cm%
+}
+
+% Title page
+\setbeamertemplate{title page}
+{
+  \vskip-1em%
+  \hfill%
+  \llap\inserttitlegraphic\par%
+  \vbox{}%
+  \vfill
+    \begin{beamercolorbox}[sep=6pt]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=6pt]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=6pt]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=6pt]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}
+  \vfill
+}
+
+% Part page
+\setbeamertemplate{part page}
+{
+    \vspace*{\fill} % \vfill seems not to work here
+    % workaround from http://www.latex-community.org/forum/viewtopic.php?f=44&t=17339
+    \begin{beamercolorbox}[sep=6pt]{part name}
+      \usebeamerfont{part name}\usebeamercolor[fg]{part name}\partname~\insertromanpartnumber
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=6pt]{part title}
+      \usebeamerfont{part title}\insertpart\par
+    \end{beamercolorbox}
+    \vspace*{\fill}
+}
+
+
+% Section page
+\setbeamertemplate{section page}
+{
+    \vfill
+    \begin{beamercolorbox}[sep=6pt]{section name}
+    \usebeamerfont{section name}\usebeamercolor[fg]{section name}\sectionname~\insertsectionnumber
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=6pt]{part title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+    \vfill
+}
+
+% Subection page
+\setbeamertemplate{subsection page}
+{
+    \vfill
+    \begin{beamercolorbox}[sep=6pt]{subsection name}
+      \usebeamerfont{subsection name}\usebeamercolor[fg]{subsection name}\subsectionname~\insertsubsectionnumber
+    \end{beamercolorbox}    \begin{beamercolorbox}[sep=6pt]{part title}
+      \usebeamerfont{subsection title}\insertsubsection\par
+    \end{beamercolorbox}
+    \vfill
+}
+
+% Table of contents - single line
+\setbeamertemplate{section in toc}
+{\quad{\small\color{jdblue}\bfseries \inserttocsectionnumber}~~\inserttocsection}

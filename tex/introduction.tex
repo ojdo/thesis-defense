@@ -1,0 +1,84 @@
+% !TeX root = ../defense.tex
+
+\section{Energy, Infrastructure, City}
+\frame{\sectionpage}
+
+\begin{frame}{Motivation}
+    \begin{alertblock}{Questions about Germany's Climate Action Plan 2050\hfill (BMUB 2015/16)}
+    \begin{enumerate}[<+->]\itemsep9pt
+    \item How can the almost complete transition from fossil fuels to renewable energy sources for electricity generation be accomplished by 2050?
+    \item How can we build acceptance for a timely grid expansion?
+    \item What proportion of fossil fuel burning power stations do we need for a transitional period, and for how long?
+    \item Which role do decentralised energy supply concepts play?
+    \item How can the electricity and heating/cooling markets be more closely integrated [\dots]?
+    \end{enumerate}
+    \end{alertblock}
+
+    \tiny
+    \hspace{3.75em}\url{http://www.klimaschutzplan2050.de/en/action-areas/energy-sector/}
+\end{frame}
+
+\begin{frame}{Perspective}{Disciplines for investigating energy topics}
+    \begin{center}
+    \begin{tikzpicture}[
+      node distance=4.5em and .75cm,font=\small
+    ]
+    % flowboxes
+    \node[flowbox] (physik) {
+        \fbtitle{Physics}\vphantom{yÖ}
+    \nodepart{two}
+        \begin{minipage}{.16\textwidth}
+            \centering
+            Theoretical\\ feasibility\\
+            \scriptsize (Natural laws)
+        \end{minipage}
+    };
+
+    \node[flowbox,right=of physik] (technik) {
+        \fbtitle{Engineering}\vphantom{yÖ}
+    \nodepart{two}
+        \begin{minipage}{.16\textwidth}
+            \centering
+            Technical\\ feasibility\\
+            \scriptsize (Technologies)
+        \end{minipage}
+    };
+
+    \node[flowbox,right=of technik] (econ) {
+        \fbtitle{Economy}\vphantom{yÖ}
+    \nodepart{two}
+        \begin{minipage}{.16\textwidth}
+            \centering
+            Economic\\ feasibility\\
+            \scriptsize (Funding)
+        \end{minipage}
+    };
+
+    \node[flowbox,right=of econ] (society) {
+        \fbtitle{Society}\vphantom{yÖ}
+    \nodepart{two}
+        \begin{minipage}{.16\textwidth}
+            \centering
+            Social\\ feasibility\\
+            \scriptsize (Decision space)
+        \end{minipage}
+    };
+
+    \uncover<2->{%
+        \draw [decorate,decoration={brace,amplitude=10pt,mirror},ultra thick,jdblue]
+            ($(technik.south west) + (-.2em,-1em)$) --
+            ($(econ.south east)    + (+.2em,-1em)$) coordinate[midway,yshift=-3.8em] (midpoint-below);
+    
+        \node[flowbox] at (midpoint-below) (tech-econ)  {
+            \fbtitle{Techno-economic modelling}\vphantom{yÖ}
+        \nodepart{two}
+            \begin{minipage}{.4\textwidth}
+                \centering
+                How much energy?
+                For how much?\vphantom{yÖ}
+            \end{minipage}
+        };
+    }
+    \end{tikzpicture}
+    \end{center}
+\end{frame}

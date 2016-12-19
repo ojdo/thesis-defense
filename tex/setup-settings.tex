@@ -1,0 +1,91 @@
+
+% Pgfplots settings and styles
+\pgfplotsset{%
+    compat=1.12,
+    major grid style={thin, color=gray!25},
+    minor grid style={thin, color=gray!25},
+    tumaxisstyle/.style={
+        axis line style={opacity=0}, major tick style={draw=none},
+        ymajorgrids, xmajorgrids},
+        every axis/.append style={font=\footnotesize},
+        legend style={draw=none, legend cell align=left},
+    /pgfplots/square ybar legend/.style={
+        /pgfplots/legend image code/.code={%
+            \fill[##1,/tikz/.cd,bar width=.5em]
+            plot coordinates { (\pgfplotbarwidth,.5em)};}}
+}
+
+% Tikz styles
+\tikzset{%
+    flowbox/.style={rectangle split, rectangle split parts=2, 
+                    rectangle split part fill={jddarkblue,jddarkblue!20},
+                    align=center},
+    conn/.style={draw=jdblue, -{Latex[length=3mm]}, 
+                 rounded corners=3pt},
+    hidden/.style={-{Latex[length=2mm]}, draw=tumdarkgrey,
+                   rounded corners=2pt, densely dotted},
+    concept/.style={fill=jddarkgrey!15},
+    darrows/.style={{Latex[length=2mm]}-{Latex[length=2mm]}},
+    onslide/.code args={<#1>#2}{\only<#1>{\pgfkeysalso{#2}}},
+    fb-muted/.style={rectangle split part fill={jdgrey,jdgrey!15}},
+    fb-highlight/.style={rectangle split part fill={jdgreen,jdgreen!20}}
+}
+
+% Tikz commands
+\newcommand{\fbtitle}[1]{\textbf{\textcolor{jdwhite}{#1}}}
+
+% custom units for siunitx
+\DeclareSIUnit\year{a}
+\DeclareSIUnit\billion{$\!$b}
+\DeclareSIUnit\million{$\!$m}
+\DeclareSIUnit\thousand{$\!$k}
+\DeclareSIUnit\USD{\$}
+\DeclareSIUnit\EUR{\text{\euro}}
+\DeclareSIUnit\kWp{kW$\!_p$}
+\DeclareSIUnit{\TWh}{TWh}
+\DeclareSIUnit{\GWh}{GWh}
+\DeclareSIUnit{\MWh}{MWh}
+\DeclareSIUnit{\TW}{\tera\watt}
+\DeclareSIUnit{\hectar}{ha}
+\AtBeginDocument{\DeclareSIUnit{\kWh}{kWh}}
+
+% handy commands
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\st}{\mathsf{s.t.}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{^\mathsf{T}}
+\newcommand{\scenario}[1]{\textcolor{jdgreen}{#1}}
+
+% beamer dimensions
+\newlength{\maxheight}
+\setlength{\maxheight}{\textheight}
+\addtolength{\maxheight}{-\headheight}
+\addtolength{\maxheight}{-\footheight}
+\addtolength{\maxheight}{-2em} % guessing :-(
+
+\AtBeginDocument{%
+\newlength{\squeezetwo}
+\setlength{\squeezetwo}{.495\paperwidth}
+%
+\newlength{\squeezethree}
+\setlength{\squeezethree}{.33\paperwidth}
+%
+\newlength{\loosethree}
+\setlength{\loosethree}{.29\textwidth}
+}
+
+% listings settings
+\lstset{
+    basicstyle={\color{jddarkgrey}\ttfamily},
+    identifierstyle=\color{jddarkblue},
+    commentstyle={\color{jdgreen}},
+    stringstyle={\color{gred}},
+    keywordstyle={\color{jddarkerblue}},
+    emphstyle={\color{jdlightblue}},
+    emph={urbs,rivus},
+    texcl=true
+}
+
+% hyperref settings
+\hypersetup{colorlinks=true,linkcolor=,urlcolor=jdgreen}

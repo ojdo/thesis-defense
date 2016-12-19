@@ -1,0 +1,10 @@
+*~
+*.aux
+*.log
+*.nav
+*.snm
+*.synctex.gz
+*.toc
+*.out
+*.vrb
+defense.pdf
